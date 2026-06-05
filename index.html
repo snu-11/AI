@@ -55,7 +55,7 @@
     }
   </style>
 </head>
-<body class="min-h-screen flex flex-col text-slate-800 animate-fade-in break-keep">
+<body class="min-h-screen flex flex-col text-slate-800 animate-fade-in break-keep bg-slate-50">
 
   <script>
     // HTML 태그 제거용 글로벌 헬퍼 함수 (에러 방지 핵심)
@@ -703,7 +703,7 @@
                 },
                 {
                   "id": "9",
-                  "text": "인공지능은 인간보다 수행을 더 잘할 수 "
+                  "text": "인공지능은 인간보다 수행을 더 잘할 수 있다."
                 },
                 {
                   "id": "10",
@@ -1124,7 +1124,7 @@
       </div>
 
       <!-- Main Survey Card -->
-      <div class="bg-white rounded-3xl shadow-md border border-slate-100 flex-grow p-6 md:p-10 flex flex-col justify-between transition-all duration-500 relative min-h-[480px]">
+      <div class="bg-white rounded-3xl shadow-md border border-slate-100 flex-grow p-4 md:p-10 flex flex-col justify-between transition-all duration-500 relative min-h-[480px]">
         
         <!-- Survey Content Area -->
         <div id="survey-content-container" class="space-y-8"></div>
@@ -1152,7 +1152,7 @@
             <span>이전</span>
           </button>
           
-          <span class="text-sm text-slate-500 font-medium">참여자 ID: <span id="respondent-uid-display" class="font-mono">GUEST</span></span>
+          <span class="text-xs md:text-sm text-slate-500 font-medium">참여자 ID: <span id="respondent-uid-display" class="font-mono">GUEST</span></span>
 
           <button id="btn-survey-next" onclick="handleSurveyNext()" class="px-8 py-3 bg-blue-800 hover:bg-blue-900 text-white rounded-xl font-bold shadow-md transition-all-300 flex items-center space-x-2 text-sm md:text-base">
             <span id="btn-survey-next-text">다음 단계</span>
@@ -1279,7 +1279,7 @@
           <!-- In-Tab Workspace: Database Integration Instruction -->
           <div id="workspace-db-settings" class="space-y-6 hidden">
             <div class="border-b pb-3 mb-4">
-              <h3 class="font-bold text-base text-slate-900">구글 드라이브(스프레드시트) 실시간 데이터 누적 연동 가이드 (동시접속 동기화 보정 버그 방지판)</h3>
+              <h3 class="font-bold text-base text-slate-900">구글 드라이브(스프레드시트) 실시간 데이터 누적 연동 가이드</h3>
               <p class="text-xs text-slate-400">구글 드라이브 앱스 스크립트(Google Apps Script)를 활용해 독립적인 무료 응답 저장 데이터베이스를 생성하는 최종 해결 프로세스입니다.</p>
             </div>
 
@@ -1971,7 +1971,7 @@ function doPost(e) {
             <ul class="list-disc pl-4 space-y-1.5 text-[12px] leading-relaxed font-semibold">
               <li>예시 문항: <span class="font-bold text-slate-800">"나는 생성형 AI를 한 번도 사용해 본 적이 없다."</span></li>
               <li>위 문항은 생성형 AI 활용자를 대상으로 하는 본 설문 특성상 <span class="text-rose-600 font-bold">"전혀 그렇지 않다" 또는 "그렇지 않다"로만 답변하셔야 정상 완료</span>됩니다.</li>
-              <li>만약 이 문항에 <span class="text-rose-600 font-bold">"보통이다", "그렇다", "매우 그렇다"</span>로 답변하시는 경우, 조건 불일치 응답자로 분류되어 <span class="text-rose-600 font-bold">설문조사가 즉시 중단 및 탈락 처리</span>되오니 한 문항씩 꼼꼼히 확인하고 솔직하게 기입해 주시기 바랍니다.</li>
+              <li>만약 이 문항에 <span class="text-rose-600 font-bold">"보통이다", "그렇다", "매우 그렇다"</span>로 답변하시는 경우, 조건 불일치 응답자로 분류되어 <span class="text-rose-600 font-bold">설문조사가 즉시 중단 및 탈락 처리</span>오니 한 문항씩 꼼꼼히 확인하고 솔직하게 기입해 주시기 바랍니다.</li>
               <li class="text-rose-700 font-bold">대상이 아니거나 검증 문항을 틀리게 입력할 시 바로 탈락 처리됩니다.</li>
             </ul>
           </div>
@@ -1979,7 +1979,7 @@ function doPost(e) {
         container.insertBefore(attentionWarningCard, container.firstChild.nextSibling);
       }
 
-      // Q0-1A~D 특수 테이블 레이아웃 그룹 선행 렌더링 (안내 문구 보강 및 멘트 수정 적용 완료)
+      // Q0-1A~D 특수 테이블 레이아웃 그룹 선행 렌더링
       if (currentSec.id === "sec_ai_usage_stats") {
         const customTableCard = document.createElement('div');
         customTableCard.className = "bg-blue-50/50 border border-blue-100 rounded-3xl p-5 md:p-6 space-y-4 mb-6 shadow-sm";
@@ -2019,7 +2019,7 @@ function doPost(e) {
               </div>
             </div>
 
-            <!-- 세부 수업 개수 구분선 ((합산 검증용) 문구 삭제 적용 완료) -->
+            <!-- 세부 수업 개수 구분선 -->
             <div class="border-t border-dashed border-blue-100 my-3 pt-3 space-y-3">
               <p class="text-[11px] font-black text-blue-800 uppercase tracking-wider flex items-center gap-1.5">
                 <i class="fa-solid fa-calculator"></i> AI 사용방침 분류 세부 현황 기입
@@ -2326,26 +2326,39 @@ function doPost(e) {
           desktopDiv.innerHTML = tableHtml;
           qWrap.appendChild(desktopDiv);
 
-          // Mobile View checklist cards
+          // Mobile View checklist cards (한 줄로 완벽히 정렬된 프리미엄 리커트 척도 디자인)
           const mobileDiv = document.createElement('div');
-          mobileDiv.className = "md:hidden space-y-3";
+          mobileDiv.className = "md:hidden space-y-4";
           
           q.rows.forEach((row, rIdx) => {
             const savedRowVal = (surveyAnswers[q.id] || {})[row.id];
             const mobCard = document.createElement('div');
-            mobCard.className = "border border-slate-200 rounded-xl p-3 bg-slate-50 space-y-3";
+            mobCard.className = "border border-slate-200 rounded-2xl p-4 bg-slate-50/70 space-y-3.5 shadow-sm";
+            
+            // Generate grid with exact column counts for Likert items
             mobCard.innerHTML = `
               <div class="flex items-start space-x-2.5">
                 <span class="w-5 h-5 bg-blue-100 text-blue-900 rounded-full flex items-center justify-center text-xs font-black shrink-0 mt-0.5">${rIdx+1}</span>
-                <p class="text-xs font-bold text-slate-800 leading-normal break-keep">${row.text}</p>
+                <p class="text-xs font-extrabold text-slate-800 leading-normal break-keep">${row.text}</p>
               </div>
-              <div class="grid grid-cols-2 gap-2 pt-1">
-                ${q.columns.map(col => {
+              
+              <!-- Horizontal Likert Grid Row -->
+              <div class="grid gap-1 pt-1" style="grid-template-columns: repeat(${q.columns.length}, minmax(0, 1fr));">
+                ${q.columns.map((col, cIdx) => {
                   const isChecked = savedRowVal === col;
                   return `
-                    <label class="flex items-center space-x-2 p-2.5 rounded-lg border bg-white cursor-pointer text-xs font-bold transition-all-300 break-keep ${isChecked ? 'border-blue-800 bg-blue-50/40 text-blue-900' : 'border-slate-200 text-slate-600'}">
-                      <input type="radio" name="mob_${q.id}_${row.id}" value="${col}" ${isChecked ? 'checked' : ''} onchange="saveMatrixValue('${q.id}', '${row.id}', '${col}')" class="w-3.5 h-3.5 text-blue-900 border-slate-300 focus:ring-blue-800">
-                      <span>${col}</span>
+                    <label class="flex flex-col items-center justify-between py-3 px-1 rounded-xl border bg-white cursor-pointer transition-all-300 min-h-[82px] ${isChecked ? 'border-blue-800 bg-blue-50/80 text-blue-950 ring-1 ring-blue-800 shadow-sm' : 'border-slate-200 text-slate-500'}" style="touch-action: manipulation;">
+                      <input type="radio" name="mob_${q.id}_${row.id}" value="${col}" ${isChecked ? 'checked' : ''} onchange="saveMatrixValue('${q.id}', '${row.id}', '${col}')" class="sr-only">
+                      
+                      <!-- Radio Outer Circle & Internal Dot -->
+                      <div class="w-5.5 h-5.5 rounded-full border-2 flex items-center justify-center transition-all ${isChecked ? 'border-blue-800 bg-blue-800 text-white scale-110' : 'border-slate-300 bg-slate-50'}">
+                        ${isChecked ? '<i class="fa-solid fa-check text-[9px]"></i>' : `<span class="text-[9px] font-extrabold text-slate-400 font-mono">${cIdx + 1}</span>`}
+                      </div>
+                      
+                      <!-- Compact Label Text -->
+                      <span class="text-[8.5px] font-black text-center leading-none mt-2 tracking-tighter block w-full whitespace-normal break-keep">
+                        ${col}
+                      </span>
                     </label>
                   `;
                 }).join('')}
@@ -2597,7 +2610,7 @@ function doPost(e) {
           return false;
         }
         if (!sq1Ans.includes("공부/과제/학업 목적")) {
-          triggerDisqualification("안녕하세요, 귀한 걸음해 주시어 연구에 따뜻한 정성을 베풀어 주심에 진심으로 감사드립니다.<br><br>본 설문지는 단순히 일반적인 AI 활용 경험이 아닌, 대학의 수강 강의나 과제, 리포트 제출 등 <strong>'대학 학업 맥락에서의 특수한 학습 의존성'</strong>을 진단하기 위해 특화 설계되었습니다. 학업 관련 활용도가 아직 없으신 경우, 아쉽게도 대상 범위에서 부득이 제외 처리됩니다.<br><br>보내주신 고마운 협조 의사는 마음에 고스란히 담아 가치 있게 간직하겠습니다. 비록 이번 과정은 여기서 조기 완성되지만, 앞날에 멋진 성공과 성장이 펼쳐지길 소망합니다. 다음에 더 보람찬 기회와 유익한 연구 주제로 다시 한 번 따뜻한 만남을 기약하겠습니다. 감사합니다! 📚✨");
+          triggerDisqualification("안녕하세요, 귀한 걸음해 주시어 연구에 따뜻한 정성을 베풀어 주심에 진심으로 감사드립니다.<br><br>본 설문지가 단순히 일반적인 AI 활용 경험이 아닌, 대학의 수강 강의나 과제, 리포트 제출 등 <strong>'대학 학업 맥락에서의 특수한 학습 의존성'</strong>을 진단하기 위해 특화 설계되었습니다. 학업 관련 활용도가 아직 없으신 경우, 아쉽게도 대상 범위에서 부득이 제외 처리됩니다.<br><br>보내주신 고마운 협조 의사는 마음에 고스란히 담아 가치 있게 간직하겠습니다. 비록 이번 과정은 여기서 조기 완성되지만, 앞날에 멋진 성공과 성장이 펼쳐지길 소망합니다. 다음에 더 보람찬 기회와 유익한 연구 주제로 다시 한 번 따뜻한 만남을 기약하겠습니다. 감사합니다! 📚✨");
           return false;
         }
 
