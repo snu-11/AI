@@ -221,7 +221,7 @@
             {
               "id": "SQ9_grade_table",
               "type": "grade_table",
-              "text": "SQ9. 귀하의 평점 학점 정보를 입력해 주십시오. (직전 학기 기준, 소수점 포함 숫자 기입)",
+              "text": "SQ9. 귀하의 평점 학점 정보를 입력해 주십시오. (직전 학기 기준, 소수점 포함 숫자 기입) - 신입생의 경우만 0 점, 0점으로 표기",
               "required": true
             },
             {
@@ -2235,13 +2235,13 @@ function doPost(e) {
             <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4 flex flex-col justify-between hover:bg-slate-100/50 transition-all duration-300">
               <div>
                 <label class="block text-sm font-bold text-slate-800 leading-tight">SQ9-1. 귀하의 평점 학점 (직전 학기 기준)</label>
-                <p class="text-[11px] text-slate-400 mt-1">소수점 둘째 자리까지 포함해 입력해 주세요.</p>
+                <p class="text-[11px] text-slate-400 mt-1">소수점 둘째 자리까지 포함해 입력해 주세요. (신입생은 0 입력)</p>
               </div>
               <div class="relative mt-4">
                 <input type="text" inputmode="decimal" id="input_SQ9_val" 
                        value="${surveyAnswers['SQ9_val'] || ''}" 
                        oninput="saveAnswer('SQ9_val', this.value, true)"
-                       placeholder="예: 3.85"
+                       placeholder="예: 3.85 (신입생은 0)"
                        class="w-full p-3 pr-10 border border-slate-300 rounded-xl text-base font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-800 bg-white text-right shadow-sm">
                 <span class="absolute right-4 top-3.5 text-xs text-slate-400 font-bold">점</span>
               </div>
@@ -2250,13 +2250,13 @@ function doPost(e) {
             <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4 flex flex-col justify-between hover:bg-slate-100/50 transition-all duration-300">
               <div>
                 <label class="block text-sm font-bold text-slate-800 leading-tight">SQ9-2. 평점 학점의 기준 만점</label>
-                <p class="text-[11px] text-slate-400 mt-1">학교 기준 만점 제도를 입력해 주세요. (예: 4.0, 4.3, 4.5 등)</p>
+                <p class="text-[11px] text-slate-400 mt-1">학교 기준 만점 제도를 입력해 주세요. (예: 4.5, 4.3 등, 신입생은 0 입력)</p>
               </div>
               <div class="relative mt-4">
                 <input type="text" inputmode="decimal" id="input_SQ9_max" 
                        value="${surveyAnswers['SQ9_max'] || ''}" 
                        oninput="saveAnswer('SQ9_max', this.value, true)"
-                       placeholder="예: 4.5"
+                       placeholder="예: 4.5 (신입생은 0)"
                        class="w-full p-3 pr-10 border border-slate-300 rounded-xl text-base font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-800 bg-white text-right shadow-sm">
                 <span class="absolute right-4 top-3.5 text-xs text-slate-400 font-bold">점</span>
               </div>
