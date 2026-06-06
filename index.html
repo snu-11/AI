@@ -1048,17 +1048,28 @@
             {
               "id": "C2_AGR",
               "type": "radio",
-              "text": "Q11. 2차 조사 참여 동의 (2차 조사는 문항이 약 20-40개 정도 예상되며, 참여 시 모든 분께 커피 쿠폰을 증정해 드립니다. 참여를 희망하신 분께는 입력해주신 번호로 개별 연락을 드릴 예정입니다.)",
+              "text": "Q11. 2차 조사 참여 동의 (2차 조사는 약 20문항이며, 참여 시 모든 분께 2000원 상당의 쿠폰을 증정해 드립니다. 참여를 희망하신 분께는 입력해주신 번호로 개별 연락을 드릴 예정입니다.)",
               "required": true,
               "options": [
-                "참여동의 (2차 조사에 참여하고 커피 쿠폰을 받겠습니다.)",
+                "참여동의",
                 "미동의"
+              ]
+            },
+            {
+              "id": "C2_COFFEE",
+              "type": "radio",
+              "text": "Q11-1. 희망하시는 모바일 경품(커피 쿠폰) 브랜드를 선택해 주세요. (선택 사항)",
+              "required": false,
+              "options": [
+                "투썸플레이스",
+                "스타벅스",
+                "상관없음"
               ]
             },
             {
               "id": "C2_PHONE",
               "type": "text",
-              "text": "Q11-1. 연락처 입력 (2차 조사 동의 여부와 관계없이 설문조사 완료 경품(커피 쿠폰) 발송용 연락처를 기재해 주세요. 2차 조사를 '참여동의' 하신 분은 필수 입력하셔야 합니다. 숫자만 입력 가능합니다.)",
+              "text": "Q11-2. 연락처 입력 (2차 조사 동의 여부와 관계없이 설문조사 완료 경품(커피 쿠폰) 발송용 연락처를 기재해 주세요. 2차 조사를 '참여동의' 하신 분은 필수 입력하셔야 합니다. 숫자만 입력 가능합니다.)",
               "required": false,
               "placeholder": "예: 01012345678"
             }
@@ -2270,6 +2281,16 @@ function doPost(e) {
           };
           qWrap.appendChild(txtInput);
 
+          // Q11-2 연락처 입력 필드 하단에 눈에 띄는 색상의 개인정보 폐기 안내 문구 추가
+          if (q.id === "C2_PHONE") {
+            const disclaimer = document.createElement('div');
+            disclaimer.className = "mt-2.5 p-3.5 rounded-xl bg-red-50 border border-red-100 text-rose-700 text-xs font-bold leading-relaxed flex items-start gap-2 shadow-sm animate-fade-in";
+            disclaimer.innerHTML = `
+              <i class="fa-solid fa-user-shield text-red-500 mt-0.5 shrink-0 text-sm"></i>
+              <span>개인정보 보호 안내: 수집된 연락처 정보는 커피 지급 완료 즉시, 또는 2차 연구 참여 희망자의 경우 2차 연구 참여 연락 진행 직후 즉시 완전히 폐기됩니다.</span>
+            `;
+            qWrap.appendChild(disclaimer);
+          }
         } else if (q.type === 'matrix') {
           if (q.id === "Q7") {
             const descBanner = document.createElement('div');
@@ -2293,8 +2314,8 @@ function doPost(e) {
             <table class="w-full text-xs md:text-sm text-left text-slate-700 border-collapse table-fixed">
               <thead class="bg-slate-50 border-b border-slate-200 text-xs uppercase font-black tracking-wider text-slate-500">
                 <tr>
-                  <th scope="col" class="px-5 py-4 font-black text-slate-950 w-[42%]">평가 질문</th>
-                  ${q.columns.map(col => `<th scope="col" class="px-2 py-4 text-center font-black text-slate-700 w-[11.6%] whitespace-nowrap">${col}</th>`).join('')}
+                  <th scope="col" class="px-5 py-4 font-black text-slate-950 w-[55%]">평가 질문</th>
+                  ${q.columns.map(col => `<th scope="col" class="px-1 py-4 text-center font-bold text-slate-700 w-[9%] text-xs md:text-sm whitespace-normal break-keep leading-tight">${col}</th>`).join('')}
                 </tr>
               </thead>
               <tbody class="divide-y divide-slate-100">
@@ -2307,11 +2328,11 @@ function doPost(e) {
             
             tableHtml += `
               <tr class="${rowBgClass} hover:bg-blue-50/30 transition-colors">
-                <td class="px-5 py-3.5 font-bold text-slate-800 leading-normal break-keep">${row.text}</td>
+                <td class="px-5 py-4 font-bold text-slate-800 leading-normal break-keep whitespace-normal">${row.text}</td>
                 ${q.columns.map(col => {
                   const isChecked = savedRowVal === col;
                   return `
-                    <td class="px-2 py-3.5 text-center">
+                    <td class="px-1 py-4 text-center">
                       <label class="inline-block p-2 cursor-pointer rounded-full hover:bg-slate-200 transition-colors">
                         <input type="radio" name="${q.id}_${row.id}" value="${col}" ${isChecked ? 'checked' : ''} onchange="saveMatrixValue('${q.id}', '${row.id}', '${col}')" class="w-4 h-4 text-blue-900 border-slate-300 focus:ring-blue-800">
                       </label>
@@ -2326,7 +2347,7 @@ function doPost(e) {
           desktopDiv.innerHTML = tableHtml;
           qWrap.appendChild(desktopDiv);
 
-          // Mobile View checklist cards (한 줄로 완벽히 정렬된 프리미엄 리커트 척도 디자인)
+          // Mobile View checklist cards
           const mobileDiv = document.createElement('div');
           mobileDiv.className = "md:hidden space-y-4";
           
@@ -2526,7 +2547,7 @@ function doPost(e) {
         if (agreement && agreement.startsWith("참여동의")) {
           if (!phoneNumber || phoneNumber.trim() === "") {
             highlightMissingQuestion("C2_PHONE");
-            return { success: false, message: "2차 조사에 참여 동의하셨으므로 설문조사 완료 경품(커피 쿠폰) 발송 및 개별 연락을 위한 '연락처 입력(Q11-1)' 항목은 필수입니다. 연락처를 기입해 주시기 바랍니다.", missingId: "C2_PHONE" };
+            return { success: false, message: "2차 조사에 참여 동의하셨으므로 설문조사 완료 경품(커피 쿠폰) 발송 및 개별 연락을 위한 '연락처 입력(Q11-2)' 항목은 필수입니다. 연락처를 기입해 주시기 바랍니다.", missingId: "C2_PHONE" };
           }
         }
       }
@@ -2791,10 +2812,11 @@ function doPost(e) {
       
       let rewardText = "";
       if (surveyAnswers["C2_PHONE"] && surveyAnswers["C2_PHONE"].trim() !== "") {
+        const brandLabel = surveyAnswers["C2_COFFEE"] ? ` [${surveyAnswers["C2_COFFEE"]}]` : "";
         rewardText = `<div class="bg-emerald-50 rounded-2xl p-5 border border-emerald-100 mt-4 leading-relaxed text-left text-emerald-800 space-y-3 shadow-inner">
           <p class="font-extrabold text-sm md:text-base flex items-center gap-1.5">
             <i class="fa-solid fa-gift text-emerald-600 animate-bounce"></i> 
-            🎉 설문 완료 경품(커피 쿠폰)을 정상 신청하셨습니다!
+            🎉 설문 완료 경품(커피 쿠폰${brandLabel})을 정상 신청하셨습니다!
           </p>
           <p class="text-xs md:text-sm font-semibold opacity-95">
             추후 기재해주신 번호(<strong class="underline">${surveyAnswers["C2_PHONE"]}</strong>)로 순차 발송해 드리도록 하겠습니다.
